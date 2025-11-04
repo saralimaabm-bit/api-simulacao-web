@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: sua-api-selenium
+    env: python
+    buildCommand: |
+      apt-get update
+      apt-get install -y chromium-browser
+      pip install -r requirements.txt
+    startCommand: gunicorn main:app
+    envVars:
+      - key: PORT
+        value: 5000
