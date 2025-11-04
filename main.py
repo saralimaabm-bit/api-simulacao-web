@@ -19,8 +19,8 @@ def executar():
         # Instala automaticamente o ChromeDriver compatível
         chromedriver_autoinstaller.install()
 
-        # Define o caminho do Chrome no ambiente da Render
-        chrome_bin = "/usr/bin/chromium-browser"
+        chrome_bin = "/usr/bin/google-chrome"
+
 
         chrome_options = Options()
         chrome_options.add_argument("--headless")
