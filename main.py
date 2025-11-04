@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
-import undetected_chromedriver as uc
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
 app = Flask(__name__)
 
@@ -14,13 +15,16 @@ def executar():
         url = dados.get("url", "https://google.com")
 
         # Inicializa o Chrome headless via undetected-chromedriver
-        options = uc.ChromeOptions()
-        options.headless = True
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
-        options.add_argument("--disable-gpu")
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--disable-gpu")
 
-        driver = uc.Chrome(options=options)
+        # Aponta para o Chrome instalado pelo apt
+        chrome_options.binary_location = "/usr/bin/google-chrome-stable"
+
+        driver = webdriver.Chrome(options=chrome_options)
         driver.get(url)
         titulo = driver.title
         driver.quit()
