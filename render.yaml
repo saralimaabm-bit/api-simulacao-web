@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: sua-api-selenium
+    name: api-simulacao-web
     env: python
     buildCommand: |
       apt-get update

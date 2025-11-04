@@ -20,9 +20,7 @@ def executar():
         chromedriver_autoinstaller.install()
 
         # Define o caminho do Chrome no ambiente da Render
-        chrome_bin = "/usr/bin/google-chrome"
-        if not os.path.exists(chrome_bin):
-            chrome_bin = "/usr/bin/chromium-browser"
+        chrome_bin = "/usr/bin/chromium-browser"
 
         chrome_options = Options()
         chrome_options.add_argument("--headless")
