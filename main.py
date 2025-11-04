@@ -2,7 +2,6 @@ from flask import Flask, jsonify, request
 import chromedriver_autoinstaller
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import os
 
 app = Flask(__name__)
 
@@ -19,15 +18,12 @@ def executar():
         # Instala automaticamente o ChromeDriver compatível
         chromedriver_autoinstaller.install()
 
-        chrome_bin = "/usr/bin/google-chrome"
-
-
+        # Configurações do Chrome
         chrome_options = Options()
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--disable-gpu")
-        chrome_options.binary_location = chrome_bin
 
         driver = webdriver.Chrome(options=chrome_options)
         driver.get(url)
@@ -37,7 +33,6 @@ def executar():
         return jsonify({"mensagem": "Página carregada!", "titulo": titulo})
     except Exception as e:
         return jsonify({"erro": str(e)}), 500
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
