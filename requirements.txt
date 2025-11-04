@@ -4,3 +4,5 @@ selenium
 sbvirtualdisplay
 pydantic
 Flask
+chromedriver-autoinstaller==0.6.4
+gunicorn==21.2.0
