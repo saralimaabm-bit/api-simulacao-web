@@ -1,7 +1,5 @@
 from flask import Flask, jsonify, request
-import chromedriver_autoinstaller
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+import undetected_chromedriver as uc
 
 app = Flask(__name__)
 
@@ -15,22 +13,20 @@ def executar():
         dados = request.json
         url = dados.get("url", "https://google.com")
 
-        # Instala automaticamente o ChromeDriver compatível
-        chromedriver_autoinstaller.install()
+        # Inicializa o Chrome headless via undetected-chromedriver
+        options = uc.ChromeOptions()
+        options.headless = True
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--disable-gpu")
 
-        # Configurações do Chrome
-        chrome_options = Options()
-        chrome_options.add_argument("--headless")
-        chrome_options.add_argument("--no-sandbox")
-        chrome_options.add_argument("--disable-dev-shm-usage")
-        chrome_options.add_argument("--disable-gpu")
-
-        driver = webdriver.Chrome(options=chrome_options)
+        driver = uc.Chrome(options=options)
         driver.get(url)
         titulo = driver.title
         driver.quit()
 
         return jsonify({"mensagem": "Página carregada!", "titulo": titulo})
+
     except Exception as e:
         return jsonify({"erro": str(e)}), 500
 

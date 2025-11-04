@@ -6,4 +6,4 @@ pydantic
 Flask
 chromedriver-autoinstaller==0.6.4
 gunicorn==23.0.0
-chromedriver-binary
+undetected-chromedriver
